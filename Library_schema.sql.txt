@@ -1,0 +1,62 @@
+﻿create database LibraryDB;
+
+use LibraryDB;
+
+CREATE Table Authors (
+  AuthorID INT primary key AUTO_INCREMENT,
+  FirstName VARCHAR(50) NOT NULL,
+  LastName VARCHAR(50) NOT NULL,
+  BirthDate DATE
+);
+
+
+CREATE Table Books (
+  BookID INT primary key AUTO_INCREMENT,
+  Title VARCHAR(100) NOT NULL,
+  AuthorID INT,
+  Publicationyear YEAR,
+  Genre VARCHAR(50),
+  FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
+);
+
+
+CREATE Table Members (
+  MemberID INT PRIMARY KEY AUTO_INCREMENT,
+  FullName VARCHAR(100) NOT NULL,
+  MembershipDate DATE,
+  Email VARCHAR(100)
+);
+
+
+
+
+INSERT INTO Authors (FirstName , LastName , BirthDate)
+VALUES
+('srinivas','Chapala','2000-01-10'),
+('Ruchitha','Naidu','1998-05-15'),
+('Lakshmi','Naga','1880-11-11');
+
+
+INSERT INTO Books (Title , AuthorID , Publicationyear , Genre)
+VALUES
+('1984',1,2020,'Dystopian'),
+('Pride',2,2022,'Action'),
+('obsession',3,2010,'Horror');
+
+
+INSERT INTO Members (FullName , MembershipDate , Email)
+VALUES
+('Suribabu','2022-09-19','suribabu1@gmail.com'),
+('Gowtham Goud','2021-12-02','gowthamgoud@gmail.com'),
+('Chaitanya velupula','2020-06-13','chaitanyavelupula49@gmail.com');
+ 
+ 
+ 
+  
+  
+
+
+
+
+
+

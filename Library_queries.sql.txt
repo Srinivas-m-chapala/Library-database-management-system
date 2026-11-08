@@ -1,0 +1,94 @@
+﻿USE LibraryDB;
+
+
+-- =====================================================
+-- RETRIEVE ALL DATA FROM EACH TABLE
+-- =====================================================
+
+-- 1. Retrieve all authors
+SELECT *
+FROM Authors;
+
+
+-- 2. Retrieve all books
+SELECT *
+FROM Books;
+
+
+-- 3. Retrieve all members
+SELECT *
+FROM Members;
+
+
+-- =====================================================
+-- BASIC AND INTERMEDIATE LIBRARY QUERIES
+-- =====================================================
+
+
+-- 4. Find all Horror books
+SELECT *
+FROM Books
+WHERE Genre = 'Horror';
+
+
+-- 5. Find members who joined after January 1, 2021
+SELECT *
+FROM Members
+WHERE MembershipDate > '2021-01-01';
+
+
+-- 6. Find books published between 2010 and 2020
+SELECT *
+FROM Books
+WHERE Publicationyear BETWEEN 2010 AND 2020;
+
+
+-- 7. Display each book with its author's name
+SELECT
+    b.BookID,
+    b.Title,
+    a.FirstName,
+    a.LastName,
+    b.Publicationyear,
+    b.Genre
+FROM Books AS b
+INNER JOIN Authors AS a
+    ON b.AuthorID = a.AuthorID;
+
+
+-- 8. Count the number of books in each genre
+SELECT
+    Genre,
+    COUNT(*) AS TotalBooks
+FROM Books
+GROUP BY Genre;
+
+
+-- 9. Count the number of books written by each author
+SELECT
+    a.AuthorID,
+    a.FirstName,
+    a.LastName,
+    COUNT(b.BookID) AS TotalBooks
+FROM Authors AS a
+INNER JOIN Books AS b
+    ON a.AuthorID = b.AuthorID
+GROUP BY
+    a.AuthorID,
+    a.FirstName,
+    a.LastName;
+
+
+-- 10. Find members whose email ends with gmail.com
+SELECT *
+FROM Members
+WHERE Email LIKE '%gmail.com';
+
+
+-- 11. Count members who joined in each year
+SELECT
+    YEAR(MembershipDate) AS MembershipYear,
+    COUNT(*) AS TotalMembers
+FROM Members
+GROUP BY YEAR(MembershipDate)
+ORDER BY MembershipYear;
